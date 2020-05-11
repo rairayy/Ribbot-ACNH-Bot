@@ -1,0 +1,1 @@
+worker: python diy_bot.py
