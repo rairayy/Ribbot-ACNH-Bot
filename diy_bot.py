@@ -1,6 +1,9 @@
 import discord
 import soup
 from bs4 import BeautifulSoup
+import os
+
+token = os.environ['TOKEN']
 
 client = discord.Client()
 diy_list = soup.get_diy_list()
@@ -42,4 +45,4 @@ async def on_message(message):
 		if(not found):
 			await message.channel.send('Item not found. Please try again!')
 
-client.run('TOKEN')
+client.run(token)
