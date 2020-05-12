@@ -29,7 +29,7 @@ async def on_message(message):
 # function
 def describe_diy(message, client, diy_name):
 	if( len(diy_name) == 0 ):
-		return 'Missing 1 argument.'
+		return message.channel.send('Zzrrbbitt! Please follow this format for DIY requests: `!ribbot diy <item name>`')
 	
 	item = diy_name[0].lower()
 	found = False
@@ -49,15 +49,13 @@ def describe_diy(message, client, diy_name):
 			return message.channel.send(embed=e)
 			break
 	if(not found):
-		return 'Item not found. Please try again!'
+		return message.channel.send('Item not found. Please try again. Zzrrbbitt!')
 # dictionary
 ch.add_command({
 	'trigger': 'diy',
 	'function': describe_diy,
 	'description': 'Will return a description of the DIY recipe.'
 })
-# ====================
 # end describe diy
-# ====================
 
 client.run(token)
