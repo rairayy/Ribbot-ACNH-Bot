@@ -4,6 +4,7 @@ from command_handler import CommandHandler
 import os
 
 token = os.environ['TOKEN']
+color = 16098851
 
 client = discord.Client()
 diy_list = soup.get_diy_list()
@@ -27,11 +28,11 @@ async def on_message(message):
 # describe diy
 # ====================
 # function
-def describe_diy(message, client, diy_name):
-	if( len(diy_name) == 0 ):
+def describe_diy(message, client, args):
+	if( len(args) == 0 ):
 		return message.channel.send('Zzrrbbitt! Please follow this format for DIY requests: `!ribbot diy <item name>`')
 	
-	item = diy_name[0].lower()
+	item = args[0].lower()
 	found = False
 	for tag in diy_list:
 		if( tag.find("th") ):
@@ -40,7 +41,7 @@ def describe_diy(message, client, diy_name):
 		if(name == item):
 			found = True
 			reply = soup.get_all(tag)
-			e = discord.Embed(title=reply[0],color=16098851)
+			e = discord.Embed(title=reply[0],color=color)
 			e.set_image(url=soup.get_img_url(tag))
 			e.add_field(name="Sell Price", value=reply[1], inline=False)
 			e.add_field(name="Type", value=reply[2], inline=False)
@@ -52,10 +53,29 @@ def describe_diy(message, client, diy_name):
 		return message.channel.send('Item not found. Please try again. Zzrrbbitt!')
 # dictionary
 ch.add_command({
+	'name': 'DIY Descriptions',
+	'format': '`!ribbot diy <item name>`',
 	'trigger': 'diy',
 	'function': describe_diy,
 	'description': 'Will return a description of the DIY recipe.'
 })
 # end describe diy
 
+# ====================
+# command list
+# ====================
+def command_list(message, client, args):
+	e = discord.Embed(title="Command List",color=color)
+	for cmd in ch.commands:
+		val_str = cmd['format']+': '+cmd['description']
+		e.add_field(name=cmd['name'],value=val_str, inline=False)
+	return message.channel.send(embed=e)
+# dictionary
+ch.add_command({
+	'name': 'Help',
+	'format': '`!ribbot help`',
+	'trigger': 'help',
+	'function': command_list,
+	'description': 'Will return a list of commands.'
+})
 client.run(token)
