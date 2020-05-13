@@ -24,4 +24,4 @@ class CommandHandler:
 			if(not found):
 				return message.channel.send('That\'s not a command. Message `!ribbot help` for the command list! Zzrrbbitt.')
 		else:
-			return message.channel.send('Zzrrbbitt?')
+			return message.channel.send('Zzrrbbitt? Message `!ribbot help` for the command list!')
