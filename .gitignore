@@ -3,3 +3,5 @@ __pycache__/
 recipe_files/
 settings.py
 .env
+BS4_sandbox.py
+out.txt

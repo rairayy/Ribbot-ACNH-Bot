@@ -1,5 +1,5 @@
 import discord
-import soup
+import diy_parser
 from command_handler import CommandHandler
 import os
 
@@ -7,7 +7,7 @@ token = os.environ['TOKEN']
 color = 16098851
 
 client = discord.Client()
-diy_list = soup.get_diy_list()
+diy_list = diy_parser.get_diy_masterlist()
 ch = CommandHandler(client)
 
 # Not entirely sure what this method does but it was in the tutorial and I'm afraid to remove it
@@ -34,19 +34,16 @@ def describe_diy(message, client, args):
 	
 	item = args[0].lower()
 	found = False
-	for tag in diy_list:
-		if( tag.find("th") ):
-			continue
-		name = soup.get_name(tag).lower()
-		if(name == item):
+	for i in diy_list:
+		if( item == i[0].lower() ):
 			found = True
-			reply = soup.get_all(tag)
-			e = discord.Embed(title=reply[0],color=color)
-			e.set_image(url=soup.get_img_url(tag))
-			e.add_field(name="Sell Price", value=reply[1], inline=False)
-			e.add_field(name="Type", value=reply[2], inline=False)
-			e.add_field(name="Materials Needed", value=reply[3], inline=False)
-			e.add_field(name="Source", value=reply[4], inline=False)
+			e = discord.Embed(title=i[0],color=color)
+			e.set_image(url=i[1])
+			e.add_field(name="Materials Needed", value='\n'.join(i[2]), inline=False)
+			e.set_thumbnail(url=i[3])
+			e.add_field(name="Obtained From", value=i[4], inline=False)
+			e.add_field(name="Sell Price", value=i[5], inline=False)
+			e.add_field(name="Type", value=i[6], inline=False)
 			return message.channel.send(embed=e)
 			break
 	if(not found):
@@ -78,4 +75,6 @@ ch.add_command({
 	'function': command_list,
 	'description': 'Will return a list of commands.'
 })
+# end command list
+
 client.run(token)
