@@ -1,1 +1,1 @@
-worker: python ribbot.py
+worker: py -3 ribbot.py

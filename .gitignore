@@ -1,6 +1,5 @@
 bot-env/
 __pycache__/
-recipe_files/
 .env
 BS4_sandbox.py
 out.txt
