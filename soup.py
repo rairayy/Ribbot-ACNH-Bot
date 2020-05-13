@@ -25,23 +25,24 @@ def get_all(row):
 	reply = []
 	# === basic info ===
 	info = children[0].contents
-	# name
-	reply.append("**Item Name: "+info[0].text+"**")
-	#price
-	reply.append("Sell Price: "+info[6].strip())
-	#type
-	reply.append("Item Type: "+info[7].text)
+	# name 0
+	reply.append(info[0].text)
+	#price 1
+	reply.append(info[6].strip())
+	#type 2
+	reply.append(info[7].text)
 	
-	# === materials ===
-	reply.append("Materials Needed:")
+	# === materials === 3
+	mats = []
 	materials = children[1].contents
 	for i in materials:
-		reply.append("\t• "+i.text.strip())
+		mats.append("\t• "+i.text.strip())
+	reply.append("\n".join(mats))
+
+	# === source === 4
+	reply.append(children[2].text)
 	
-	# === source ===
-	reply.append("Source: "+children[2].text)
-	
-	return "\n".join(reply)
+	return reply
 
 # Method for retrieving url of recipe image
 # Params:
