@@ -1,5 +1,3 @@
-bot-env/
-__pycache__/
 .env
 BS4_sandbox.py
 out.txt
