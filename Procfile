@@ -1,1 +1,1 @@
-worker: python diy_bot.py
+worker: python ribbot.py
