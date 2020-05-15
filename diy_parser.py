@@ -22,7 +22,7 @@ def get_diy(filename,table_class,type):
 			else:
 				tool.append('')
 			# 2 materials
-			tool.append(['• '+s.group() for s in re.finditer('(x[0-9]+[ A-Za-z]+[^x0-9])|([0-9]+x[ A-Za-z])',cols[2].text.strip())])
+			tool.append(['• '+s.group() for s in re.finditer('(x[0-9]+[ A-Za-z]+[^x0-9])|([0-9]+x[ A-Za-z]+)',cols[2].text.strip())])
 			# 3 size
 			size_link = cols[3].find('a')
 			if( size_link != None ):
@@ -41,11 +41,11 @@ def get_diy(filename,table_class,type):
 
 def get_diy_masterlist():
 	diy_master = []
-	diy_master.extend(get_diy('.\\html\\recipes\\tools.html','sortable','Tool'))
-	diy_master.extend(get_diy('.\\html\\recipes\\housewares.html','sortable','Houseware'))
-	diy_master.extend(get_diy('.\\html\\recipes\\equipment.html','sortable','Equipment'))
-	diy_master.extend(get_diy('.\\html\\recipes\\misc.html','sortable','Miscellaneous'))
-	diy_master.extend(get_diy('.\\html\\recipes\\wall.html','sortable','Wall Mounted'))
-	diy_master.extend(get_diy('.\\html\\recipes\\rug-wall-floor.html','sortable','Wallpaper, Rug, Flooring'))
-	diy_master.extend(get_diy('.\\html\\recipes\\other.html','sortable','Other'))
+	diy_master.extend(get_diy('html/recipes/tools.html','sortable','Tool'))
+	diy_master.extend(get_diy('html/recipes/housewares.html','sortable','Houseware'))
+	diy_master.extend(get_diy('html/recipes/equipment.html','sortable','Equipment'))
+	diy_master.extend(get_diy('html/recipes/misc.html','sortable','Miscellaneous'))
+	diy_master.extend(get_diy('html/recipes/wall.html','sortable','Wall Mounted'))
+	diy_master.extend(get_diy('html/recipes/rug-wall-floor.html','sortable','Wallpaper, Rug, Flooring'))
+	diy_master.extend(get_diy('html/recipes/other.html','sortable','Other'))
 	return diy_master
